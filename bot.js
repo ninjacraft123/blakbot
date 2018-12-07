@@ -6,13 +6,13 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (msg.content === 'هنا') {
-    msg.reply('محمد الملك');
+    msg.reply('لوفي الملك');
   }
 });
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`Bhelp`,"https://www.twitch.tv/dggamingbot")
+client.user.setGame(`jhelp`,"https://www.twitch.tv/dggamingbot")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -59,7 +59,7 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => { // هاذا للبرودكسات
-        var prefix = 'B'; // هنا تقدر تغير البرفكس
+        var prefix = 'j'; // هنا تقدر تغير البرفكس
 	var command = message.content.split(" ")[0];
 	if(command == prefix + 'bc') { // الكوماند !bc
 		if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You don`t have **MANAGE_MESSAGES** permission!");
@@ -121,7 +121,7 @@ client.on('message', message => {
 });
 
 client.on("message", message => {
-    var prefix = "B";
+    var prefix = "j";
  
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clear")) {
@@ -145,7 +145,7 @@ client.on("message", message => {
 
 
 client.on('message', message => {
-    var prefix = "B"
+    var prefix = "j"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
  
@@ -183,7 +183,7 @@ client.on('message', message => {
 
 
 client.on("message", message => {
-var prefix = "B";
+var prefix = "j";
         if(message.content.startsWith(prefix + "say")) {
     if(message.author.id !== "401441334864510986") return message.reply("هذا الامر لصحاب البوت فقط");
         let args = message.content.split(" ").slice(1);
@@ -192,7 +192,7 @@ message.channel.send(args)
 });
 
 client.on("message", (message) => {
-if (message.content.startsWith("Bct")) {
+if (message.content.startsWith("jct")) {
             if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
         let args = message.content.split(" ").slice(1);
     message.guild.createChannel(args.join(' '), 'text');
@@ -202,7 +202,7 @@ message.channel.sendMessage('تـم إنـشاء روم كـتابـي')
 });
 
 client.on("message", (message) => {
-if (message.content.startsWith("Bcv")) {
+if (message.content.startsWith("jcv")) {
             if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
         let args = message.content.split(" ").slice(1);
     message.guild.createChannel(args.join(' '), 'voice');
@@ -213,7 +213,7 @@ if (message.content.startsWith("Bcv")) {
 
       client.on('message', message => {
                                 if(!message.channel.guild) return;
-                        if (message.content.startsWith('Bping')) {
+                        if (message.content.startsWith('jping')) {
                             if(!message.channel.guild) return;
                             var msg = `${Date.now() - message.createdTimestamp}`
                             var api = `${Math.round(client.ping)}`
@@ -228,7 +228,7 @@ if (message.content.startsWith("Bcv")) {
                     });
 					
 client.on('message', message => {
-    var prefix = "B"
+    var prefix = "j"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
  
@@ -267,7 +267,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content === "Bserver") {
+    if (message.content === "jserver") {
         if (!message.channel.guild) return
         var verificationLevel = message.guild.verificationLevel;
         const verificationLevels = ['None','Low','Meduim','High','Extreme'];
@@ -293,7 +293,7 @@ client.on('message', message => {
     });
 
   client.on('message', message => {
-    if (message.content === "Brooms") {
+    if (message.content === "jrooms") {
                       if (!message.guild) return;
 
         var channels = message.guild.channels.map(channels => `${channels.name}, `).join(' ')
@@ -309,7 +309,7 @@ client.on('message', message => {
 
     client.on('message', message => {
               if (!message.channel.guild) return;
-      if(message.content =='Bmembers')
+      if(message.content =='jmembers')
       var IzRo = new Discord.RichEmbed()
       .setThumbnail(message.author.avatarURL)
       .setFooter(message.author.username, message.author.avatarURL) 
@@ -325,7 +325,7 @@ client.on('message', message => {
     });
   
     client.on('message', message => {
-     if (message.content === "Bid") {
+     if (message.content === "jid") {
      let embed = new Discord.RichEmbed()
   .setThumbnail(message.author.avatarURL)  
   .setAuthor(message.author.username)
@@ -343,7 +343,7 @@ client.on('message', message => {
     }
 });
 
- const perfix = 'B';
+ const perfix = 'j';
 client.on('message', msg => {
  if (msg.content.startsWith(prefix + 'send')) {
       let args = msg.content.split(' ').slice(1)
@@ -361,7 +361,7 @@ client.on('message', msg => {
 });
  
 client.on('message', message => {
-	var prefix = "B";
+	var prefix = "j";
     if(message.author.bot) return;
     var name1 = message.mentions.users.first();
     var reason = message.content.split(' ').slice(2).join(' ');
@@ -384,7 +384,7 @@ client.on('message', message => {
     }
 });
 
-var prefix = "B" 
+var prefix = "j" 
 client.on('message', async msg => {
     if (msg.author.bot) return undefined;
    
@@ -582,14 +582,14 @@ client.on("message", message => {
   const embed = new Discord.RichEmbed()
       .setColor("#000000")
       .setDescription(`
-Bplay ⇏ لتشغيل أغنية برآبط أو بأسم
-Bskip ⇏ لتجآوز الأغنية الحآلية
-Bstop ⇏ إيقآف الأغنية مؤقتا
-Bresume ⇏ لموآصلة الإغنية بعد إيقآفهآ مؤقتا
-Bvol ⇏ لتغيير درجة الصوت 100 - 0
-Bleave⇏ لإخرآج البوت من الروم
-Bnp ⇏ لمعرفة الأغنية المشغلة حآليا
-Bqueue ⇏ لمعرفة قآئمة التشغيل
+jplay ⇏ لتشغيل أغنية برآبط أو بأسم
+jskip ⇏ لتجآوز الأغنية الحآلية
+jstop ⇏ إيقآف الأغنية مؤقتا
+jresume ⇏ لموآصلة الإغنية بعد إيقآفهآ مؤقتا
+jvol ⇏ لتغيير درجة الصوت 100 - 0
+jleave⇏ لإخرآج البوت من الروم
+jnp ⇏ لمعرفة الأغنية المشغلة حآليا
+jqueue ⇏ لمعرفة قآئمة التشغيل
 
  `)
    message.channel.sendEmbed(embed)
@@ -598,7 +598,7 @@ Bqueue ⇏ لمعرفة قآئمة التشغيل
    });
  
 client.on("message", message => {
- if (message.content === "Bhelp") {
+ if (message.content === "jhelp") {
         message.react("😘")
            message.react("😵")
   const embed = new Discord.RichEmbed() 
@@ -614,20 +614,20 @@ client.on("message", message => {
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ● 
 💎『اوامر عامة』💎
                         
-💎Bserver『معلومات عن السيرفر』                      
-💎Bping『لمعرفه سرعه البوت』
-💎Bsay『لي يكرر الكلام الذي تقوله』
-💎Bmembers『معلومات عن الاعضاء』        
-💎Lrooms『معلومات عن الرومات』  
-💎Lhelpm『هيلب لميوزك』  
+💎jserver『معلومات عن السيرفر』                      
+💎jping『لمعرفه سرعه البوت』
+💎jsay『لي يكرر الكلام الذي تقوله』
+💎jmembers『معلومات عن الاعضاء』        
+💎jrooms『معلومات عن الرومات』  
+💎jhelpm『هيلب لميوزك』  
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ● 
 👑『اوامر ادارية』👑
-👑Bban『لتعطي شخص باند』
-👑Bkick『لتعطي شخص كيك』
-👑Bclear『لمسح الشات برقم』
-👑Bct  مـلاحظه: الاسم انت تختاره『لي انشاء روم كتابي』
-👑Bcv  مـلاحظه: الاسم انت تختاره『لي انشاء روم صوتي』
-👑Bsend『ارسال رسالة لشخص محدد』
+👑jban『لتعطي شخص باند』
+👑jkick『لتعطي شخص كيك』
+👑jclear『لمسح الشات برقم』
+👑jct  مـلاحظه: الاسم انت تختاره『لي انشاء روم كتابي』
+👑jcv  مـلاحظه: الاسم انت تختاره『لي انشاء روم صوتي』
+👑jsend『ارسال رسالة لشخص محدد』
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ● 
 `)
 
@@ -652,7 +652,7 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on('ready',async () => {
-  client.channels.find(ch => ch.id === "512325679241756682" && ch.type === 'voice').join();
+  client.channels.find(ch => ch.id === "477828479191351306" && ch.type === 'voice').join();
 });
 
 client.login(process.env.BOT_TOKEN);
