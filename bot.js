@@ -12,7 +12,7 @@ client.on('message', msg => {
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`+help`,"https://www.twitch.tv/dggamingbot")
+client.user.setGame(`shelp`,"https://www.twitch.tv/dggamingbot")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -59,7 +59,7 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => { // هاذا للبرودكسات
-        var prefix = '+'; // هنا تقدر تغير البرفكس
+        var prefix = 's'; // هنا تقدر تغير البرفكس
 	var command = message.content.split(" ")[0];
 	if(command == prefix + 'bc') { // الكوماند !bc
 		if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You don`t have **MANAGE_MESSAGES** permission!");
@@ -121,7 +121,7 @@ client.on('message', message => {
 });
 
 client.on("message", message => {
-    var prefix = "+";
+    var prefix = "s";
  
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clear")) {
@@ -145,7 +145,7 @@ client.on("message", message => {
 
 
 client.on('message', message => {
-    var prefix = "+"
+    var prefix = "s"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
  
@@ -183,7 +183,7 @@ client.on('message', message => {
 
 
 client.on("message", message => {
-var prefix = "+";
+var prefix = "s";
         if(message.content.startsWith(prefix + "say")) {
     if(message.author.id !== "401441334864510986") return message.reply("هذا الامر لصحاب البوت فقط");
         let args = message.content.split(" ").slice(1);
@@ -192,7 +192,7 @@ message.channel.send(args)
 });
 
 client.on("message", (message) => {
-if (message.content.startsWith("+ct")) {
+if (message.content.startsWith("sct")) {
             if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
         let args = message.content.split(" ").slice(1);
     message.guild.createChannel(args.join(' '), 'text');
@@ -202,7 +202,7 @@ message.channel.sendMessage('تـم إنـشاء روم كـتابـي')
 });
 
 client.on("message", (message) => {
-if (message.content.startsWith("+cv")) {
+if (message.content.startsWith("scv")) {
             if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
         let args = message.content.split(" ").slice(1);
     message.guild.createChannel(args.join(' '), 'voice');
@@ -228,7 +228,7 @@ if (message.content.startsWith("+cv")) {
                     });
 					
 client.on('message', message => {
-    var prefix = "+"
+    var prefix = "s"
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
  
@@ -267,7 +267,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content === "+server") {
+    if (message.content === "sserver") {
         if (!message.channel.guild) return
         var verificationLevel = message.guild.verificationLevel;
         const verificationLevels = ['None','Low','Meduim','High','Extreme'];
@@ -293,7 +293,7 @@ client.on('message', message => {
     });
 
   client.on('message', message => {
-    if (message.content === "+rooms") {
+    if (message.content === "srooms") {
                       if (!message.guild) return;
 
         var channels = message.guild.channels.map(channels => `${channels.name}, `).join(' ')
@@ -309,7 +309,7 @@ client.on('message', message => {
 
     client.on('message', message => {
               if (!message.channel.guild) return;
-      if(message.content =='+members')
+      if(message.content =='smembers')
       var IzRo = new Discord.RichEmbed()
       .setThumbnail(message.author.avatarURL)
       .setFooter(message.author.username, message.author.avatarURL) 
@@ -325,7 +325,7 @@ client.on('message', message => {
     });
   
     client.on('message', message => {
-     if (message.content === "+id") {
+     if (message.content === "sid") {
      let embed = new Discord.RichEmbed()
   .setThumbnail(message.author.avatarURL)  
   .setAuthor(message.author.username)
@@ -344,7 +344,7 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-	var prefix = "+";
+	var prefix = "s";
     if(message.author.bot) return;
     var name1 = message.mentions.users.first();
     var reason = message.content.split(' ').slice(2).join(' ');
@@ -384,33 +384,33 @@ client.on("message", message => {
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ● 
 💎『اوامر عامة』💎
                         
-💎+server『معلومات عن السيرفر』
+💎sserver『معلومات عن السيرفر』
 
-💎+ping『لمعرفه سرعه البوت』
+💎sping『لمعرفه سرعه البوت』
 
-💎+say『لي يكرر الكلام الذي تقوله』
+💎ssay『لي يكرر الكلام الذي تقوله』
 
-💎+members『معلومات عن الاعضاء』 
+💎smembers『معلومات عن الاعضاء』 
 
-💎+rooms『معلومات عن الرومات』 
+💎srooms『معلومات عن الرومات』 
 
-💎 report『لل ابلاع عن شخص』
+💎sreport『لل ابلاع عن شخص』
 
-💎+id『معلومات عنك』
+💎sid『معلومات عنك』
 
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
 
 👑『اوامر ادارية』👑
 
-👑+ban『لتعطي شخص باند』
+👑sban『لتعطي شخص باند』
 
-👑+kick『لتعطي شخص كيك』
+👑skick『لتعطي شخص كيك』
 
-👑+clear『لمسح الشات برقم』
+👑sclear『لمسح الشات برقم』
 
-👑+ct  مـلاحظه: الاسم انت تختاره『لي انشاء روم كتابي』
+👑sct  مـلاحظه: الاسم انت تختاره『لي انشاء روم كتابي』
 
-👑+cv  مـلاحظه: الاسم انت تختاره『لي انشاء روم صوتي』
+👑scv  مـلاحظه: الاسم انت تختاره『لي انشاء روم صوتي』
 
 ● ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ●
 
