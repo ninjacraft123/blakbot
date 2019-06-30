@@ -213,7 +213,7 @@ if (message.content.startsWith("scv")) {
 
       client.on('message', message => {
                                 if(!message.channel.guild) return;
-                        if (message.content.startsWith('jping')) {
+                        if (message.content.startsWith('sping')) {
                             if(!message.channel.guild) return;
                             var msg = `${Date.now() - message.createdTimestamp}`
                             var api = `${Math.round(client.ping)}`
@@ -368,7 +368,7 @@ client.on('message', message => {
 });
 
 client.on("message", message => {
- if (message.content === "+help") {
+ if (message.content === "shelp") {
         message.react("😘")
            message.react("😵")
   const embed = new Discord.RichEmbed() 
