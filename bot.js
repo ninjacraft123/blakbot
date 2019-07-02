@@ -369,7 +369,7 @@ client.on('ready',async () => {
 bot.on('messageCreate', async(message) => {
   if(message.author.bot || !message.channel.guild) return undefined;
   let args = message.content.toLowerCase().split(' ');
-  let cmd = args[0].slice(s.length);
+  let cmd = args[0].slice(prefix.length);
   if(cmd == `avatar`){
     let avt =  message.mentions[0] ? message.member.guild.members.get(message.mentions[0].id) : message.member.guild.members.find(m => m.user.id == args[1] || m.user.username.toLowerCase().includes(args[1]) || m.user.discriminator == args[1]) || message.member;
     let avtName;
@@ -384,104 +384,63 @@ bot.on('messageCreate', async(message) => {
 }
 });
 
-var prefix = 's'; // your prefix
-client.on('message', message => {
-  if(message.content.split(' ')[0] == `${prefix}ban`){
-  if(!message.guild || message.author.bot) return undefined;
-      if(!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('You don\'t have permission.');
-      if(!message.guild.member(client.user).hasPermission('BAN_MEMBERS')) return message.channel.send('I don\'t have permission.');
-      let args = message.content.split(" ").slice(1);
-      let user = message.guild.members.get(message.content.split(' ')[1]) || message.mentions.members.first();
-      let reason = message.content.split(" ").slice(2).join(" ");
-      if(!user) return message.channel.send(`Usage: ${prefix}ban @mention reason`);
-      if(!reason) reason = 'No reason provided.';
-      if(user.user.id === message.author.id) return message.channel.send('You can\'t ban yourself!');
-      if(message.guild.member(user.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`You can't ban **${user.user.tag}** because his role highest than your role!`);
-     if(message.guild.member(user.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`I can't ban **${user.user.tag}** because his role highest than my role!`);
-      if(message.guild.member(user.user).hasPermission('MANAGE_GUILD') || user.user.id == message.guild.owner.id) return message.channel.send(`You can't ban **${user.user.tag}** because he have Administration permissions!`);
-     if(!message.guild.member(user.user).bannable) return message.channel.send(`I can't ban **${user.user.tag}**.`);
-      message.guild.member(user).ban(reason, user);
-      message.channel.send(`Done :+1:, I Banned ${user.user.username} from the server!\nReason: \`\`${reason}\`\``);
-    }
-});
+client.on('message', async message =>{
+  if (message.author.boss) return;
+	var prefix = "s";
 
-var prefix = 's'; // your prefix
-client.on('message', message => {	
-  if(message.content.split(' ')[0] == `${prefix}kick`){
-  if(!message.guild || message.author.bot) return undefined;
-      if(!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(':no_entry: | You dont have **KICK_MEMBERS** Permission!');
-      if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return message.channel.send(':no_entry: | I dont have **KICK_MEMBERS** Permission!');
-      let args = message.content.split(" ").slice(1);
-      let user = message.guild.members.get(message.content.split(' ')[1]) || message.mentions.members.first();
-      let reason = message.content.split(" ").slice(2).join(" ");
-      if(!user) return message.channel.send("**• | Usage:** !kick \`\`@Name\`\` reason");
-      if(!reason) reason = 'No reason provided.';
-      if(user.user.id === message.author.id) return message.channel.send(':no_entry: | Why you want kick **Your Self** ?');
-      if(user.user.id === message.guild.owner.id) return message.channel.send(':no_entry: | Nice try dude \:D');
-      if(message.guild.member(user.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:no_entry: | You cant give **${user.user.username}** Kick because his role highest than your role!`);
-      if(message.guild.member(user.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`:no_entry: | I cant give **${user.user.username}** Kick because his role highest than my role!`);
-      if(!message.guild.member(user.user).kickable) return message.channel.send(`:no_entry: | I cant give **${user.user.username}** Kick.`);
-      if(message.guild.member(user.user).hasPermission('MANAGE_GUILD')) return message.channel.send(`:no_entry: | You cant give **${user.user.username}** Kick because he have Administration permissions!`);
-      message.guild.member(user).kick(reason, user);
-      message.channel.send(`:white_check_mark: | Successfully \`\`KICKED\`\` ${user.user.username} from the server! :airplane: \`\`${reason}\`\``);
-    }
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "mute") {
+		if (!message.channel.guild) return;
+		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انت لا تملك صلاحيات !! ").then(msg => msg.delete(5000));
+		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
+		let user = message.mentions.users.first();
+		let muteRole = message.guild.roles.find("name", "Muted");
+		if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
+		if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
+		let reason = message.content.split(" ").slice(2).join(" ");
+		message.guild.member(user).addRole(muteRole);
+		const muteembed = new Discord.RichEmbed()
+		.setColor("RANDOM")
+		.setAuthor(`Muted!`, user.displayAvatarURL)
+		.setThumbnail(user.displayAvatarURL)
+		.addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
+		.addField("**:hammer:  تم بواسطة **", '**[ ' + `${message.author.tag}` + ' ]**',true)
+		.addField("**:book:  السبب**", '**[ ' + `${reason}` + ' ]**',true)
+		.addField("User", user, true)
+		message.channel.send({embed : muteembed});
+		var muteembeddm = new Discord.RichEmbed()
+		.setAuthor(`Muted!`, user.displayAvatarURL)
+		.setDescription(`      
+${user} انت معاقب بميوت كتابي بسبب مخالفة القوانين
+${message.author.tag} تمت معاقبتك بواسطة
+[ ${reason} ] : السبب
+اذا كانت العقوبة عن طريق الخطأ تكلم مع المسؤلين
+`)
+		.setFooter(`في سيرفر : ${message.guild.name}`)
+		.setColor("RANDOM")
+	user.send( muteembeddm);
+  }
+if(command === `unmute`) {
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("**ما عندي برمشن**").then(msg => msg.delete(6000))
+
+  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
+
+  let role = message.guild.roles.find (r => r.name === "Muted");
+  
+  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذه شخص ميوت من الأساس**:x:")
+
+  await toMute.removeRole(role)
+  message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
+
+  return;
+
+  }
+
 });
-const sql = require('sqlite');
-const path = require('path');
-sql.open(path.join(__dirname, 'credits.sql')) // read sql file
-.then(() => { // then ?
-    console.log('Opened') // if the sql opened
-    sql.run(`CREATE TABLE IF NOT EXISTS creditSysteme (id VARCHAR(30), credits BIGINT, timeDaily BIGINT)`) // create new table if the table does'nt exosts
-})
-.catch(err => console.error(err)) // if the sql file does'nt exists
- 
-const ms = require('parse-ms'); // package time ?
-client.on("message", async msg => { // event message
-    if(!msg.channel.guild) return; // channel guild
-    let men = msg.mentions.users.first() || msg.author; // the mention or the author
-    let prize =  msg.content.split(" ").slice(2).join(" ") // prize
- 
-    if(msg.content.startsWith(prefix+"credits")) { // if the message content credits do
-        if(!men || !men === undefined) return msg.channel.send("** :interrobang: | "+men.username+", I can't find "+men.username+"!**"); // undefind user
-        if(!prize) {
-        sql.get(`SELECT * FROM creditSysteme WHERE id = '${men.id}'`).then(res => { // select user from table
-            if(!res) sql.run(`INSERT INTO creditSysteme VALUES ('${men.id}', 0, 0)`) // if the user does'nt exisit in table
-            if(res) { // if user exsist
-                    msg.channel.send("**"+men.username+" :credit_card: balance is ``"+res.credits+"$``.**") // reply
-            }
-        })
-        }else{ // else ?
-            if(isNaN(prize)) return msg.channel.send(" :interrobang: | "+msg.author.username+", type the credit you need to transfer!"); // is nan :)
-            if(parseFloat(prize) === NaN) return msg.channel.send(" :interrobang: | "+msg.author.username+", type the credit you need to transfer!"); // if nan :))
-            if(men === msg.author) return; // if the men = author
-            let authorRes = await sql.get(`SELECT * FROM creditSysteme WHERE id = '${msg.author.id}'`) // select from sql
-            let userRes = await sql.get(`SELECT * FROM creditSysteme WHERE id = '${men.id}'`) // select from sql
-            if(!authorRes) sql.run(`INSERT INTO creditSysteme VALUES ('${msg.author.id}', 0, 0)`) // if !user create new col
-            if(!userRes) sql.run(`INSERT INTO creditSysteme VALUES ('${men.id}', 0, 0)`) // if !user create new col
-            let authorCredits = authorRes.credits; // credits before transfer
-            let userCredits = userRes.credits; // credits before transfer
-            if(parseFloat(prize) > authorCredits) return msg.channel.send("** :thinking: | "+msg.author.username+", Your balance is not enough for that!**"); // if the balance hight then prize
-            sql.run(`UPDATE creditSysteme SET credits = ${authorCredits - parseInt(prize)} WHERE id = '${msg.author.id}'`); // uptade credits for the author
-            sql.run(`UPDATE creditSysteme SET credits = ${userCredits + parseInt(prize)} WHERE id = '${men.id}'`); // update credits for the mentions user
-            msg.channel.send("**:moneybag: | "+msg.author.username+", has transferred ``$"+prize+"`` to "+men.toString()+"**") // the message :)
-        }
-    } else if(msg.content.startsWith(prefix+"daily")) {  // if the message content daily do
-        let daily = 86400000; // 24h
-        let amount = Math.floor((Math.random() * 500) + 1) // Money
-    let res = await sql.get(`SELECT * FROM creditSysteme WHERE id = '${msg.author.id}'`) // select from sql
-        if(!res) sql.run(`INSERT INTO creditSysteme VALUES ('${men.id}', 0, 0)`) // if !user create new col
-    let time = res.timeDaily; // select last daily
-    let credits = res.credits; // credits before daily
-    if(time != null && daily - (Date.now() - time) > 0) { // if already climed the daily in same day
- 
-            let fr8 = ms(daily - (Date.now() - time)); // the remining time
-            msg.channel.send("**:stopwatch: | "+msg.author.username+", your daily :yen: credits refreshes in "+fr8.hours+" hours and "+fr8.seconds+" seconds. **") //reply
- 
-        }else{ // if does'nt clim her daily in 24h
-            msg.channel.send("**:atm:  |  "+msg.author.username+", you received your :yen: "+amount+" daily credits!**"); // reply
-            sql.run(`UPDATE creditSysteme SET credits = ${credits + amount}, timeDaily = ${Date.now()} WHERE id = '${msg.author.id}'`); // add amount to the credits before daily
-        }
-    }
-})
 
 client.login(process.env.BOT_TOKEN);
